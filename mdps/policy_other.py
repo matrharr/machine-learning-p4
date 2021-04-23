@@ -1,12 +1,9 @@
 import mdptoolbox.example
-import numpy as np
+from helpers.open_ai_convert import OpenAI_MDPToolbox
 
-P = np.array([
-
-])
-R = np.array([
-    
-])
+ex = OpenAI_MDPToolbox('FrozenLake-v0', False)
+P = ex.P
+R = ex.R
 pi = mdptoolbox.mdp.PolicyIteration(
     P, # transitions
     R, # rewards

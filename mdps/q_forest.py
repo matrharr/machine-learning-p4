@@ -14,7 +14,7 @@ ql = mdptoolbox.mdp.QLearning(
     n_iter=10000,
 )
 ql.run()
-print('q learning Q matrix:', ql.Q)
+# print('q learning Q matrix:', ql.Q)
 print('q learning value function:', ql.V)
 print('q learning mean discrepancy:', ql.mean_discrepancy)
 print('q learning best policy:', ql.policy)
