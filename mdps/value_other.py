@@ -1,6 +1,7 @@
 import mdptoolbox.example
 from helpers.open_ai_convert import OpenAI_MDPToolbox
-from helpers.plot_graphs import plot_discount, plot_ep
+from helpers.plot_graphs import plot_rewards
+from hiive.mdptoolbox.mdp import ValueIteration
 
 disc = [0.1, 0.3, 0.5, 0.7, 0.9]
 ep = [0.00099, 0.001, 0.005, 0.01, 0.03]
@@ -10,7 +11,7 @@ P = ex.P
 R = ex.R
 results = []
 for d in disc:
-    vi = mdptoolbox.mdp.ValueIteration(
+    vi = ValueIteration(
         P,
         R,
         d,
@@ -24,11 +25,14 @@ for d in disc:
     print('value iteration best policy:', vi.policy)
     results.append(vi)
 
-plot_discount(disc, results, 'Value Iteration Discount Other', 'value_iteration_discount_other')
+plot_rewards(
+    disc, results, 'Value Iteration Discount/Rewards FrozenLake',
+    'value_iteration_discount_rewards_frozenlake', 'Discount'
+)
 
 results = []
 for e in ep:
-    vi = mdptoolbox.mdp.ValueIteration(
+    vi = ValueIteration(
         P,
         R,
         0.3,
@@ -42,4 +46,7 @@ for e in ep:
     print('value iteration best policy:', vi.policy)
     results.append(vi)
 
-plot_ep(ep, results, 'Value Iteration Epsilon Other', 'value_iteration_epsilon_other')
+plot_rewards(
+    ep, results, 'Value Iteration Epsilon/Rewards FrozenLake',
+    'value_iteration_epsilon_rewards_frozenlake', 'Epsilon'
+)

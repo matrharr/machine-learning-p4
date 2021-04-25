@@ -1,7 +1,9 @@
 import mdptoolbox.example
-from helpers.plot_graphs import plot_discount
+from helpers.plot_graphs import plot_discount, plot_rewards
+from hiive.mdptoolbox.mdp import PolicyIterationModified, PolicyIteration
 
 disc = [0.1, 0.3, 0.5, 0.7, 0.9]
+ep = [0.00099, 0.001, 0.005, 0.01, 0.03]
 
 P, R = mdptoolbox.example.forest(
     S=500,
@@ -12,14 +14,37 @@ P, R = mdptoolbox.example.forest(
 )
 results = []
 for d in disc:
-    pi = mdptoolbox.mdp.PolicyIteration(
+    pi = PolicyIteration(
+    # pi = PolicyIterationModified(
         P, # transitions
         R, # rewards
         d, # discount
-        policy0=None,
+        # epsilon=0.01,
         max_iter=1000,
-        eval_type=0,
     )
+    pi.run()
+    print('policy iteration value function:', pi.V)
+    print('policy iteration iterations:', pi.iter)
+    print('policy iteration time:', pi.time)
+    print('policy iteration best policy:', pi.policy)
+    print('############################', pi.run_stats)
+    results.append(pi)
+
+plot_rewards(
+    disc, results, 'Policy Iteration Discount/Rewards Forest',
+    'policy_iteration_discount_rewards_forest', 'Discount'
+)
+results = []
+for e in ep:
+    pi = PolicyIteration(
+    # pi = PolicyIterationModified(
+        P, # transitions
+        R, # rewards
+        0.3, # discount
+        # epsilon=e,
+        max_iter=1000,
+    )
+    pi.epsilon = e
     pi.run()
     print('policy iteration value function:', pi.V)
     print('policy iteration iterations:', pi.iter)
@@ -27,4 +52,7 @@ for d in disc:
     print('policy iteration best policy:', pi.policy)
     results.append(pi)
 
-plot_discount(disc, results, 'Policy Iteration Discount Forest', 'policy_iteration_discount_forest')
+plot_rewards(
+    ep, results, 'Policy Iteration Epsilon/Rewards Forest',
+    'policy_iteration_epsilon_rewards_forest', 'Epsilon'
+)
