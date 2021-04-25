@@ -54,3 +54,18 @@ plot_rewards(
     ep, results, 'Policy Iteration Epsilon/Rewards Forest',
     'policy_iteration_epsilon_rewards_forest', 'Epsilon'
 )
+
+print('----------------Best PI Forest---------------')
+pi = PolicyIteration(
+    # pi = PolicyIterationModified(
+        P, # transitions
+        R, # rewards
+        0.9, # discount
+        # epsilon=e,
+        max_iter=1000,
+    )
+pi.run()
+print('policy iteration value function:', pi.V)
+print('policy iteration iterations:', pi.iter)
+print('policy iteration time:', pi.time)
+print('policy iteration best policy:', pi.policy)

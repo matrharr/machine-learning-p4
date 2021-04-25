@@ -50,3 +50,17 @@ plot_rewards(
     ep, results, 'Value Iteration Epsilon/Rewards FrozenLake',
     'value_iteration_epsilon_rewards_frozenlake', 'Epsilon'
 )
+
+print('----------------Best VI FrozenLake---------------')
+vi = ValueIteration(
+        P,
+        R,
+        0.9,
+        epsilon=0.001,
+        max_iter=1000
+    )
+vi.run()
+print('value iteration value function:', vi.V)
+print('value iteration iterations:', vi.iter)
+print('value iteration time:', vi.time)
+print('value iteration best policy:', vi.policy)

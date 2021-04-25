@@ -52,3 +52,17 @@ plot_rewards(
     ep, results, 'Policy Iteration Epsilon/Rewards FrozenLake',
     'policy_iteration_epsilon_rewards_frozenlake', 'Epsilon'
 )
+
+print('----------------Best PI FrozenLake---------------')
+pi = PolicyIteration(
+    # pi = PolicyIterationModified(
+        P, # transitions
+        R, # rewards
+        0.9, # discount
+        max_iter=1000,
+    )
+pi.run()
+print('policy iteration value function:', pi.V)
+print('policy iteration iterations:', pi.iter)
+print('policy iteration time:', pi.time)
+print('policy iteration best policy:', pi.policy)

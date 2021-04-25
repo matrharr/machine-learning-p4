@@ -80,3 +80,19 @@ plot_rewards(
     alpha, results, 'Q-Learning Alpha/Rewards FrozenLake',
     'q_learning_alpha_rewards_frozenlake', 'Alpha'
 )
+
+print('----------------Best QL FrozenLake---------------')
+ql = QLearning(
+        P, # transitions
+        R, # rewards
+        0.55, # discount
+        alpha=0.9, alpha_decay=0.99, alpha_min=0.001,
+        epsilon=0.5, epsilon_min=0.1, epsilon_decay=0.99,
+        n_iter=10000, skip_check=False, iter_callback=None,
+        run_stat_frequency=None
+    )
+ql.run()
+# print('q learning Q matrix:', ql.Q)
+print('q learning value function:', ql.V)
+# print('q learning mean discrepancy:', ql.mean_discrepancy)
+print('q learning best policy:', ql.policy)

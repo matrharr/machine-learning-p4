@@ -22,8 +22,8 @@ def plot_rewards(x_data, res, title, name, x_axis):
         indvdl_reward = 0
         for d in r.run_stats:
             indvdl_reward += d['Reward']
-
-        rewards.append(indvdl_reward)
+        avg = indvdl_reward/r.run_stats[-1]['Iteration']
+        rewards.append(avg)
 
     plt.plot(x_data, rewards, '-b', marker='o')
     plt.title(title)
