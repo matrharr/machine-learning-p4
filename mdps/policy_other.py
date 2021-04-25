@@ -36,7 +36,7 @@ for e in ep:
     # pi = PolicyIterationModified(
         P, # transitions
         R, # rewards
-        0.3, # discount
+        0.9, # discount
         # epsilon=e,
         max_iter=1000,
     )

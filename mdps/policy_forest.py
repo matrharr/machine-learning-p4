@@ -7,7 +7,7 @@ ep = [0.00099, 0.001, 0.005, 0.01, 0.03]
 
 P, R = mdptoolbox.example.forest(
     S=500,
-    r1=4,
+    r1=100,
     r2=2,
     p=0.1,
     is_sparse=False
@@ -19,7 +19,6 @@ for d in disc:
         P, # transitions
         R, # rewards
         d, # discount
-        # epsilon=0.01,
         max_iter=1000,
     )
     pi.run()
@@ -27,7 +26,6 @@ for d in disc:
     print('policy iteration iterations:', pi.iter)
     print('policy iteration time:', pi.time)
     print('policy iteration best policy:', pi.policy)
-    print('############################', pi.run_stats)
     results.append(pi)
 
 plot_rewards(
@@ -40,7 +38,7 @@ for e in ep:
     # pi = PolicyIterationModified(
         P, # transitions
         R, # rewards
-        0.3, # discount
+        0.9, # discount
         # epsilon=e,
         max_iter=1000,
     )

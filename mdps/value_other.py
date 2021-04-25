@@ -15,7 +15,7 @@ for d in disc:
         P,
         R,
         d,
-        epsilon=0.01,
+        epsilon=0.001,
         max_iter=1000
     )
     vi.run()
@@ -35,7 +35,7 @@ for e in ep:
     vi = ValueIteration(
         P,
         R,
-        0.3,
+        0.9,
         epsilon=e,
         max_iter=1000
     )

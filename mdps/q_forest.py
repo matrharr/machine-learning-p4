@@ -4,12 +4,15 @@ from hiive.mdptoolbox.mdp import QLearning
 
 P, R = mdptoolbox.example.forest(
     S=500,
-    r1=4,
+    r1=100,
     r2=2,
     p=0.1,
     is_sparse=False
 )
-disc = [0.1, 0.3, 0.5, 0.7, 0.9, 2.1, 4, 5, 10]
+disc = [0.1, 0.3, 0.5, 0.7, 0.9]
+# ep = [1.0, 0.9, 0.5, 0.3, 0.1, 0.01]
+ep = [0.00099, 0.001, 0.005, 0.01, 0.03]
+alpha = [1.0, 0.9, 0.5, 0.3, 0.1, 0.01]
 
 results = []
 for d in disc:
@@ -34,16 +37,15 @@ plot_rewards(
     'q_learning_discount_rewards_forest', 'Discount'
 )
 
-ep = [1.0, 0.9, 0.5, 0.3, 0.1, 0.01]
 
 results = []
 for e in ep:
     ql = QLearning(
         P, # transitions
         R, # rewards
-        0.9, # discount
+        0.7, # discount
         alpha=0.1, alpha_decay=0.99, alpha_min=0.001,
-        epsilon=e, epsilon_min=0.1, epsilon_decay=0.99,
+        epsilon=e, epsilon_min=0.000001, epsilon_decay=0.99,
         n_iter=10000, skip_check=False, iter_callback=None,
         run_stat_frequency=None
     )
@@ -59,14 +61,13 @@ plot_rewards(
     'q_learning_epsilon_rewards_forest', 'Epsilon'
 )
 
-alpha = [1.0, 0.9, 0.5, 0.3, 0.1, 0.01]
 
 results = []
 for a in alpha:
     ql = QLearning(
         P, # transitions
         R, # rewards
-        0.9, # discount
+        0.7, # discount
         alpha=a, alpha_decay=0.99, alpha_min=0.001,
         epsilon=0.5, epsilon_min=0.1, epsilon_decay=0.99,
         n_iter=10000, skip_check=False, iter_callback=None,

@@ -7,7 +7,7 @@ ep = [0.00099, 0.001, 0.005, 0.01, 0.03]
 
 P, R = mdptoolbox.example.forest(
     S=500,
-    r1=4,
+    r1=100,
     r2=2,
     p=0.1,
     is_sparse=False
@@ -18,7 +18,7 @@ for d in disc:
         P,
         R,
         d,
-        epsilon=0.01,
+        epsilon=0.001,
         max_iter=1000
     )
     vi.run()
@@ -38,7 +38,7 @@ for e in ep:
     vi = ValueIteration(
         P,
         R,
-        0.3,
+        0.9,
         epsilon=e,
         max_iter=1000
     )
